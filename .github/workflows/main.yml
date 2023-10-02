@@ -1,10 +1,9 @@
-name: Continous Deployment - Run tests and if succesfull deploy
+name: Run Tests and deploy
 
 on: push
-
 jobs:
   run-tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -21,14 +20,18 @@ jobs:
     needs: run-tests
     runs-on: ubuntu-latest
     steps:
-      - name: SSH login on droplet and update CD app
-        uses: appleboy/ssh-action@master
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@v0.1.10
         with:
-          host: ${{ secrets.HOST_SECRET }}
-          port: ${{ secrets.PORT_SECRET }}
-          username: ${{ secrets.USERNAME_SECRET }}
-          key: ${{ secrets.CD_SECRET }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
           script: |
+            echo 'Welcome'
             cd /home/CD
-            git pull origin main
-            systemctl restart --now CD
+            git fetch
+            git pull origin master
+            systemctl reload nginx
+            systemctl restart CD
+            echo 'Deployment successfull'
