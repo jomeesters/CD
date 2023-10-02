@@ -1,0 +1,39 @@
+name: Run Tests & Deploy
+
+on: 
+  push:
+    branches: [main]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-20.04 # Specify on which operating system we want this workflow to run
+    steps:   # The steps that will be excuted
+      - name: Checkout repository
+        uses: actions/checkout@v3 #checkout the repository content to github runner
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11.0'  # install the python version needed
+      - name: Install Dependencies
+        run: pip install -r requirements.txt  # install the dependencies from requirements.txt
+      - name: Run tests
+        run: pytest
+        
+  deploy:
+    needs: run-tests  # Specify which job is required in order to execute this one
+    runs-on: ubuntu-20.04 # Specify on which operating system we want this workflow to run
+    steps:  # The steps that will be excuted
+      - name: Checkout repository
+        uses: actions/checkout@v3 #checkout the repository content to github runner
+      - name: Deploy Flask CD App
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{secrets.SSH_HOST}} # IP adress of the server
+          key: ${{secrets.SSH_KEY}} # SSH private public key of the server
+          username: ${{secrets.SSH_USERNAME}} # User of the server
+          
+          script: |
+            cd ../home/CD/CD-Final-Assignment 
+            git pull origin main
+            systemctl restart CD
+            echo "Deployment successful to Digital Ocean" 
