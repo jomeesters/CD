@@ -1,16 +1,7 @@
-import pytest
-
 from main import app
 
-
-@pytest.fixture
-def client():
-    client = app.test_client()
-    return client
-
-
-def test_index(client):
-    response = client.get("/")
-
+def test_index():
+    response = app.test_client().get('/')
+    
+    assert response.data == b'Hello, world...! It works finally again!'
     assert response.status_code == 200
-    assert response.data == b"Hello, welcome to my last assignment for Winc!"
