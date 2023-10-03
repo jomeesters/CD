@@ -1,7 +1,6 @@
 import unittest
 from main import index, final, cow, passit
 
-
 class TestFunctions(unittest.TestCase):
     def test_index(self):
         assert index() == "Hello, world!"
