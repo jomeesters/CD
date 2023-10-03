@@ -31,6 +31,7 @@ jobs:
           host: ${{secrets.SSH_HOST}} # IP adress of the server
           key: ${{secrets.SSH_KEY}} # SSH private public key of the server
           username: ${{secrets.SSH_USERNAME}} # User of the server
+          port: ${{secrets.SSH_PORT}}
           
           script: |
             cd ../home/CD/CD-Final-Assignment 
