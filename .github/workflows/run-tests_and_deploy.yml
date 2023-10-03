@@ -6,7 +6,7 @@ on:
 
 jobs:
   run-tests:
-    runs-on: ubuntu-20.04 # Specify on which operating system we want this workflow to run
+    runs-on: ubuntu-23.04 # Specify on which operating system we want this workflow to run
     steps:   # The steps that will be excuted
       - name: Checkout repository
         uses: actions/checkout@v3 #checkout the repository content to github runner
@@ -21,7 +21,7 @@ jobs:
         
   deploy:
     needs: run-tests  # Specify which job is required in order to execute this one
-    runs-on: ubuntu-20.04 # Specify on which operating system we want this workflow to run
+    runs-on: ubuntu-23.04 # Specify on which operating system we want this workflow to run
     steps:  # The steps that will be excuted
       - name: Checkout repository
         uses: actions/checkout@v3 #checkout the repository content to github runner
