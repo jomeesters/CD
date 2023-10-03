@@ -19,4 +19,4 @@ def final():
 
 @app.route('/pass')
 def passit():
-    return 'I hope I will pass for the first time ^^'
+    return 'I hope I will pass this time ^^'
