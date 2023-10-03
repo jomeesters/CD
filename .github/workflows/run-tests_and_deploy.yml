@@ -26,7 +26,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3 #checkout the repository content to github runner
       - name: Deploy Flask CD App
-        uses: appleboy/ssh-action@v0.1.2
+        uses: appleboy/ssh-action@v0.1.4
         with:
           host: ${{secrets.SSH_HOST}} # IP adress of the server
           key: ${{secrets.SSH_KEY}} # SSH private public key of the server
