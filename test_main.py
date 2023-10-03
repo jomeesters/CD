@@ -10,4 +10,4 @@ class TestFunctions(unittest.TestCase):
     def test_final(self):
         assert final() == "Welcome to my final assignment!"
     def test_passit(self):
-        assert passit() == 'I hope I will pass for the first time ^^'
+        assert passit() == 'I hope I will pass this time ^^'
