@@ -34,7 +34,7 @@ jobs:
           
           
           script: |
-            cd ../home/CD/CD-Final-Assignment 
-            git pull origin main
-            systemctl restart CD
+            cd /home/CD
+              git pull origin main
+              systemctl restart --now CD
             echo "Deployment successful to Digital Ocean" 
