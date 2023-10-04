@@ -35,6 +35,6 @@ jobs:
           
           script: |
             cd ../home/CD 
-            git pull 
+            git pull main
             systemctl restart CD
             echo "Deployment successful to Digital Ocean"  
