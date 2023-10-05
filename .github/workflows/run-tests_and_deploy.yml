@@ -34,7 +34,9 @@ jobs:
           
           
           script: |
-            cd /home/CD 
+            echo 'Welcome to my server'
+            cd /home/CD
+            echo 'Now in home/CD'
             git pull 
             systemctl restart CD
             systemctl status CD
